@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'formpage.dart';
 import 'if_bmi.dart';
+import 'listdata.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/formpage': (BuildContext context) => const FormPage(),
         '/if_bmi': (BuildContext context) => const IfBmi(),
-        //'/c': (BuildContext context) => MyPage(title: 'page C'),
+        '/listdata': (BuildContext context) => const ListData(),
       },
     );
   }
@@ -108,6 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: const Icon(Icons.loop),
             tooltip: 'Show Snackbar',
             onPressed: () {
+              Navigator.pushNamed(context, '/listdata');
               ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Button loop pressed')));
             },
