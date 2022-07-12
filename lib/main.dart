@@ -134,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
 
-          mainAxisAlignment: MainAxisAlignment.start, //start,center,end
+          mainAxisAlignment: MainAxisAlignment.center, //start,center,end
           children: <Widget>[
             const Padding(
               padding: EdgeInsets.all(16.0),

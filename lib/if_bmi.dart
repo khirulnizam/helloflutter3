@@ -36,49 +36,143 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   //define id to retrieve value from TextField
-  final gajicontroller = TextEditingController();
+  final heightcontroller = TextEditingController();
+  final weightcontroller = TextEditingController();
+  double _weightSliderValue = 50;
+  double _heightSliderValue = 150;
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+    return Scaffold(
+      body: ListView(
         children: <Widget>[
           const Padding(
             padding: EdgeInsets.all(16.0),
             child: Image(image: AssetImage('images/logozakat.png')),
           ),
-          const Text(
-            'Baki KWSP selepas 55tahun:',
-          ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            //TextField ID
+            padding:
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
             child: TextField(
-              controller: gajicontroller,
-              obscureText: false, //true like password
+              controller: weightcontroller, //in kg
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Baki kwsp RM',
+                labelText: 'Weight (kg)',
               ),
             ),
+          ), //padding name
+          Padding(
+            //TextField ID
+            padding:
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+            child: Slider(
+              value: _weightSliderValue,
+              min: 0,
+              max: 200,
+              divisions: 200,
+              label: _weightSliderValue.round().toString(),
+              onChanged: (double value) {
+                setState(() {
+                  _weightSliderValue = value;
+                  weightcontroller.text = value.toString();
+                });
+              },
+            ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              double kiraperatus, kwsp;
-              kwsp = double.parse(gajicontroller.text.toString());
-              kiraperatus = kwsp * 0.025;
-              Fluttertoast.showToast(
-                  msg: "Zakat KWSP anda RM$kiraperatus",
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.CENTER,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
-            },
-            child: const Text('Kira 0.25% Zakat KWSP'),
+          Padding(
+            //TextField ID
+            padding:
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+            child: TextField(
+              controller: heightcontroller, //in meter
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Height (cm)',
+              ),
+            ),
+          ), //number padding
+          Padding(
+            //TextField ID
+            padding:
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+            child: Slider(
+              value: _heightSliderValue,
+              min: 0,
+              max: 200,
+              divisions: 200,
+              label: _heightSliderValue.round().toString(),
+              onChanged: (double value) {
+                setState(() {
+                  _heightSliderValue = value;
+                  heightcontroller.text = value.toString();
+                });
+              },
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(16.0),
+            child: ElevatedButton(
+              child:
+                  const Text('Calculate BMI', style: TextStyle(fontSize: 20)),
+              onPressed: () {
+                /* BMI calculation process
+                formula BMI=kg/(m*m)
+                BMI Categories:
+                  Underweight = <18.5
+                  Normal weight = 18.5–24.9
+                  Overweight = 25–29.9
+                  Obesity = BMI of 30 or greater
+                */
+                double kg = double.parse(weightcontroller.text);
+                double meter = double.parse(heightcontroller.text) / 100;
+                //double kg=weight.text;
+                //double meter=height.text;
+                String category, message;
+
+                //formula BMI=kg/(m*m)
+                double BMI = kg / (meter * meter);
+                if (BMI <= 18.8) {
+                  message = "You are UNDERWEIGHT";
+                  Fluttertoast.showToast(
+                      msg: message,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      backgroundColor: Colors.green,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                } else if (BMI >= 18.8 && BMI < 25) {
+                  message = "Your BMI is  NORMAL";
+                  Fluttertoast.showToast(
+                      msg: message,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      backgroundColor: Colors.blue,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                } else if (BMI >= 25 && BMI < 30) {
+                  message = "Your BMI is  OVERWEIGHT";
+                  Fluttertoast.showToast(
+                      msg: message,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      backgroundColor: Colors.orange,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                } else if (BMI >= 30) {
+                  message = "Your BMI is categorised as OBESITY";
+                  Fluttertoast.showToast(
+                      msg: message,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                } //else if
+              }, //end onPressed
+            ),
           ),
         ],
       ),
     );
-  }
+  } //end Widget build
 }
