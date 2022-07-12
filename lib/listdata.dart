@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart'; //FlutterToast plugins
+//import 'package:fluttertoast/fluttertoast.dart'; //FlutterToast plugins
 
 class ListData extends StatelessWidget {
   const ListData({Key? key}) : super(key: key);
@@ -48,6 +48,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     "Sabah",
     "WP - Kuala Lumpur",
     "WP - Putrajaya",
+    "WP - Labuan",
   ];
 
   @override
@@ -58,7 +59,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           return Container(
             margin: const EdgeInsets.all(5),
             padding: const EdgeInsets.all(5),
-            color: Color.fromARGB(255, 131, 155, 234),
+            color: const Color.fromARGB(255, 131, 155, 234),
             child: ListTile(
               title: Text(itemnegeri),
             ),
