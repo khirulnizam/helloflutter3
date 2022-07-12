@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'formpage.dart';
+import 'if_bmi.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,6 +27,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'HelloFLutter3 Zakat Home'),
+      routes: <String, WidgetBuilder>{
+        '/formpage': (BuildContext context) => const FormPage(),
+        '/if_bmi': (BuildContext context) => const IfBmi(),
+        //'/c': (BuildContext context) => MyPage(title: 'page C'),
+      },
     );
   }
 }
@@ -71,10 +78,43 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
+        //refer to https://api.flutter.dev/flutter/material/AppBar-class.html
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        actions: <Widget>[
+          IconButton(
+            //appbar buttons numbers
+            icon: const Icon(Icons.numbers),
+            tooltip: 'Zakat KWSP',
+            onPressed: () {
+              Navigator.pushNamed(context, '/formpage');
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Button numbers pressed')));
+            },
+          ),
+          IconButton(
+            //appbar buttons ifs
+            icon: const Icon(Icons.arrow_circle_right),
+            tooltip: 'Kiraan BMI',
+            onPressed: () {
+              Navigator.pushNamed(context, '/if_bmi');
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Button ifs pressed')));
+            },
+          ),
+          IconButton(
+            //appbar buttons loop
+            icon: const Icon(Icons.loop),
+            tooltip: 'Show Snackbar',
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Button loop pressed')));
+            },
+          ),
+        ],
       ),
+
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
