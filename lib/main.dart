@@ -29,9 +29,11 @@ class MyApp extends StatelessWidget {
       ),
       home: const MyHomePage(title: 'HelloFLutter3 Zakat Home'),
       routes: <String, WidgetBuilder>{
-        '/formpage': (BuildContext context) => const FormPage(),
-        '/if_bmi': (BuildContext context) => const IfBmi(),
-        '/listdata': (BuildContext context) => const ListData(),
+        '/formpage': (BuildContext context) =>
+            const FormPage(), //basic textbox & var
+        '/if_bmi': (BuildContext context) => const IfBmi(), //if & slider
+        '/listdata': (BuildContext context) =>
+            const ListData(), //array & listview
       },
     );
   }
