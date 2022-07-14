@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:helloflutter3/datanegeri.dart';
+import 'paparbendera.dart';
 //import 'package:fluttertoast/fluttertoast.dart'; //FlutterToast plugins
 
 class ListData extends StatelessWidget {
@@ -35,20 +37,18 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   //senarai negeri in array List
   List<String> negeri2 = [
+    "Malaysia",
+    "Kedah",
     "Johor",
     "Melaka",
-    "Negeri Sembilan",
+    "N.Sembilan",
     "Selangor",
     "Perak",
-    "Kedah",
     "Perlis",
     "Kelantan",
     "Terengganu",
     "Sarawak",
     "Sabah",
-    "WP - Kuala Lumpur",
-    "WP - Putrajaya",
-    "WP - Labuan",
   ];
 
   @override
@@ -61,8 +61,27 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             padding: const EdgeInsets.all(5),
             color: const Color.fromARGB(255, 131, 155, 234),
             child: ListTile(
-              title: Text(itemnegeri),
-            ),
+                title: Text(itemnegeri),
+                onTap: () {
+                  //simpan pilihan negeri
+                  DataNegeri.negeri = itemnegeri;
+                  if (itemnegeri == "Kedah") {
+                    DataNegeri.urlbendera =
+                        "http://khirulnizam.com/bendera/kedah.png";
+                  } else if (itemnegeri == "Johor") {
+                    DataNegeri.urlbendera =
+                        "http://khirulnizam.com/bendera/johor.png";
+                  } else if (itemnegeri == "Melaka") {
+                    DataNegeri.urlbendera =
+                        "http://khirulnizam.com/bendera/melaka.png";
+                  } else {
+                    DataNegeri.urlbendera =
+                        "http://khirulnizam.com/bendera/malaysia.png";
+                  }
+                  Navigator.of(context).push(MaterialPageRoute(
+                      //route not named
+                      builder: (context) => PaparBendera()));
+                }),
           );
         }).toList(),
       ),
