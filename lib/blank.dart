@@ -33,8 +33,6 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  //define id to retrieve value from TextField
-  final gajicontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Center(
